@@ -1,8 +1,8 @@
-package biblioteca.backend.controller;
+package com.projeto.biblioteca.backend.controller;
 
-import biblioteca.backend.domain.dto.CategoriaDTO;
-import biblioteca.backend.domain.model.Categoria;
-import biblioteca.backend.service.CategoriaService;
+import com.projeto.biblioteca.backend.domain.dto.CategoriaDTO;
+import com.projeto.biblioteca.backend.domain.model.Categoria;
+import com.projeto.biblioteca.backend.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

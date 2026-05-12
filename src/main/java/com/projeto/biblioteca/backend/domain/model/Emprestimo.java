@@ -1,4 +1,4 @@
-package biblioteca.backend.domain.model;
+package com.projeto.biblioteca.backend.domain.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

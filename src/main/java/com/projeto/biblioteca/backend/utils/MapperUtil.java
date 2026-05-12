@@ -1,4 +1,4 @@
-package biblioteca.backend.utils;
+package com.projeto.biblioteca.backend.utils;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

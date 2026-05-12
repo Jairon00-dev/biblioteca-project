@@ -1,8 +1,8 @@
-package biblioteca.backend.controller;
+package com.projeto.biblioteca.backend.controller;
 
-import biblioteca.backend.domain.dto.LivroDTO;
-import biblioteca.backend.domain.model.Livro;
-import biblioteca.backend.service.LivroService;
+import com.projeto.biblioteca.backend.domain.dto.LivroDTO;
+import com.projeto.biblioteca.backend.domain.model.Livro;
+import com.projeto.biblioteca.backend.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

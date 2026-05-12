@@ -1,9 +1,9 @@
-package biblioteca.backend.service;
+package com.projeto.biblioteca.backend.service;
 
-import biblioteca.backend.domain.dto.CategoriaDTO;
-import biblioteca.backend.domain.model.Categoria;
-import biblioteca.backend.repository.CategoriaRepository;
-import biblioteca.backend.utils.MapperUtil;
+import com.projeto.biblioteca.backend.domain.dto.CategoriaDTO;
+import com.projeto.biblioteca.backend.domain.model.Categoria;
+import com.projeto.biblioteca.backend.repository.CategoriaRepository;
+import com.projeto.biblioteca.backend.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

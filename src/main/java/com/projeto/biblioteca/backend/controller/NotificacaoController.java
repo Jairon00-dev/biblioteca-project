@@ -1,8 +1,8 @@
-package biblioteca.backend.controller;
+package com.projeto.biblioteca.backend.controller;
 
-import biblioteca.backend.domain.dto.NotificacaoDTO;
-import biblioteca.backend.domain.model.Notificacao;
-import biblioteca.backend.service.NotificacaoService;
+import com.projeto.biblioteca.backend.domain.dto.NotificacaoDTO;
+import com.projeto.biblioteca.backend.domain.model.Notificacao;
+import com.projeto.biblioteca.backend.service.NotificacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

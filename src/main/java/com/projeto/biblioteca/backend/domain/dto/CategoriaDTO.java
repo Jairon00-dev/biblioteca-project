@@ -1,4 +1,4 @@
-package biblioteca.backend.domain.dto;
+package com.projeto.biblioteca.backend.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

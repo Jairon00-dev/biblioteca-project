@@ -1,8 +1,8 @@
-package biblioteca.backend.controller;
+package com.projeto.biblioteca.backend.controller;
 
-import biblioteca.backend.domain.dto.EmprestimoDTO;
-import biblioteca.backend.domain.model.Emprestimo;
-import biblioteca.backend.service.EmprestimoService;
+import com.projeto.biblioteca.backend.domain.dto.EmprestimoDTO;
+import com.projeto.biblioteca.backend.domain.model.Emprestimo;
+import com.projeto.biblioteca.backend.service.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

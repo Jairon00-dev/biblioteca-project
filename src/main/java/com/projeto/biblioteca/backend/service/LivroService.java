@@ -1,9 +1,9 @@
-package biblioteca.backend.service;
+package com.projeto.biblioteca.backend.service;
 
-import biblioteca.backend.domain.dto.LivroDTO;
-import biblioteca.backend.domain.model.Livro;
-import biblioteca.backend.repository.LivroRepository;
-import biblioteca.backend.utils.MapperUtil;
+import com.projeto.biblioteca.backend.domain.dto.LivroDTO;
+import com.projeto.biblioteca.backend.domain.model.Livro;
+import com.projeto.biblioteca.backend.repository.LivroRepository;
+import com.projeto.biblioteca.backend.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,11 @@ public class LivroService {
 
         Livro livroSalvo = repository.save(livro);
 
-        auditoriaService.registrar("Livro salvo: " + livro.getTitulo());
+        auditoriaService.registrar(
+                "CREATE",
+                "Livro",
+                "Livro criado: " + livro.getTitulo()
+        );
 
         return livroSalvo;
     }
@@ -47,11 +51,20 @@ public class LivroService {
     }
 
     public LivroDTO findById(Long id){
-        return MapperUtil.parseObject(repository.findById(id).orElseThrow(), LivroDTO.class);
+        return MapperUtil.parseObject(
+                repository.findById(id).orElseThrow(),
+                LivroDTO.class
+        );
     }
 
     public void delete(Long id){
+
         repository.deleteById(id);
-        auditoriaService.registrar("Livro removido ID: " + id);
+
+        auditoriaService.registrar(
+                "DELETE",
+                "Livro",
+                "Livro removido ID: " + id
+        );
     }
 }

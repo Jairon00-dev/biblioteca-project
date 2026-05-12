@@ -1,9 +1,9 @@
-package biblioteca.backend.service;
+package com.projeto.biblioteca.backend.service;
 
-import biblioteca.backend.domain.dto.NotificacaoDTO;
-import biblioteca.backend.domain.model.Notificacao;
-import biblioteca.backend.repository.NotificacaoRepository;
-import biblioteca.backend.utils.MapperUtil;
+import com.projeto.biblioteca.backend.domain.dto.NotificacaoDTO;
+import com.projeto.biblioteca.backend.domain.model.Notificacao;
+import com.projeto.biblioteca.backend.repository.NotificacaoRepository;
+import com.projeto.biblioteca.backend.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

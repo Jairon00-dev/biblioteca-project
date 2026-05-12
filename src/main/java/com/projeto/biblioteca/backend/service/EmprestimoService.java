@@ -1,9 +1,9 @@
-package biblioteca.backend.service;
+package com.projeto.biblioteca.backend.service;
 
-import biblioteca.backend.domain.dto.EmprestimoDTO;
-import biblioteca.backend.domain.model.Emprestimo;
-import biblioteca.backend.repository.EmprestimoRepository;
-import biblioteca.backend.utils.MapperUtil;
+import com.projeto.biblioteca.backend.domain.dto.EmprestimoDTO;
+import com.projeto.biblioteca.backend.domain.model.Emprestimo;
+import com.projeto.biblioteca.backend.repository.EmprestimoRepository;
+import com.projeto.biblioteca.backend.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,11 @@ public class EmprestimoService {
 
         Emprestimo salvo = repository.save(emprestimo);
 
-        auditoriaService.registrar("Empréstimo realizado ID: " + salvo.getId());
+        auditoriaService.registrar(
+                "CREATE",
+                "Emprestimo",
+                "Empréstimo realizado ID: " + salvo.getId()
+        );
 
         return salvo;
     }
@@ -32,10 +36,20 @@ public class EmprestimoService {
     }
 
     public EmprestimoDTO findById(Long id){
-        return MapperUtil.parseObject(repository.findById(id).orElseThrow(), EmprestimoDTO.class);
+        return MapperUtil.parseObject(
+                repository.findById(id).orElseThrow(),
+                EmprestimoDTO.class
+        );
     }
 
     public void delete(Long id){
+
         repository.deleteById(id);
+
+        auditoriaService.registrar(
+                "DELETE",
+                "Emprestimo",
+                "Empréstimo removido ID: " + id
+        );
     }
 }
