@@ -13,8 +13,9 @@ public class Auditoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String acao;
+    private String acao;        
     private String entidade;
     private String descricao;
+
     private LocalDateTime data;
 }
