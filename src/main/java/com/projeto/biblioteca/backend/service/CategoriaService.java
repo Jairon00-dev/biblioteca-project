@@ -15,19 +15,44 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository repository;
 
+    @Autowired
+    private AuditoriaService auditoriaService;
+
     public Categoria save(Categoria categoria){
-        return repository.save(categoria);
+
+        Categoria salva = repository.save(categoria);
+
+        auditoriaService.registrar(
+                "CREATE",
+                "Categoria",
+                "Categoria criada: " + categoria.getNome()
+        );
+
+        return salva;
     }
 
     public List<CategoriaDTO> findAll(){
-        return MapperUtil.parseListObjects(repository.findAll(), CategoriaDTO.class);
+        return MapperUtil.parseListObjects(
+                repository.findAll(),
+                CategoriaDTO.class
+        );
     }
 
     public CategoriaDTO findById(Long id){
-        return MapperUtil.parseObject(repository.findById(id).orElseThrow(), CategoriaDTO.class);
+        return MapperUtil.parseObject(
+                repository.findById(id).orElseThrow(),
+                CategoriaDTO.class
+        );
     }
 
     public void delete(Long id){
+
         repository.deleteById(id);
+
+        auditoriaService.registrar(
+                "DELETE",
+                "Categoria",
+                "Categoria removida ID: " + id
+        );
     }
 }

@@ -16,12 +16,7 @@ public class NotificacaoController {
     private NotificacaoService service;
 
     @PostMapping
-    public Notificacao create(@RequestBody Notificacao notificacao){
-        return service.save(notificacao);
-    }
-
-    @PutMapping
-    public Notificacao update(@RequestBody Notificacao notificacao){
+    public Notificacao save(@RequestBody Notificacao notificacao){
         return service.save(notificacao);
     }
 

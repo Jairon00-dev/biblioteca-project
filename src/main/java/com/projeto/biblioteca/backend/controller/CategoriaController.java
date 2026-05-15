@@ -16,12 +16,7 @@ public class CategoriaController {
     private CategoriaService service;
 
     @PostMapping
-    public Categoria create(@RequestBody Categoria categoria){
-        return service.save(categoria);
-    }
-
-    @PutMapping
-    public Categoria update(@RequestBody Categoria categoria){
+    public Categoria save(@RequestBody Categoria categoria){
         return service.save(categoria);
     }
 
