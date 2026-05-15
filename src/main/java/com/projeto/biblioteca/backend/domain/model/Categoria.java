@@ -1,10 +1,13 @@
 package com.projeto.biblioteca.backend.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +26,8 @@ public class Categoria {
     private String setor;
 
     private String observacao;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "categoria")
+    private List<Livro> livros;
 }

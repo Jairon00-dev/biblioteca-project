@@ -9,8 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CategoriaDTO {
 
+    private Long id;
+
     private String nome;
-    private String descricao;
-    private String codigo;
-    private Boolean ativo;
+
+    private String setor;
+
+    private String observacao;
 }
