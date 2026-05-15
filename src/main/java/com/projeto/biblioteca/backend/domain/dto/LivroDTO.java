@@ -16,4 +16,6 @@ public class LivroDTO {
     private String autor;
 
     private Integer quantidadeDisponivel;
+
+    private CategoriaDTO categoria;
 }
