@@ -13,9 +13,14 @@ public class AuditoriaService {
     @Autowired
     private AuditoriaRepository repository;
 
-    public void registrar(String acao, String entidade, String descricao) {
+    public void registrar(
+            String acao,
+            String entidade,
+            String descricao
+    ) {
 
         Auditoria auditoria = new Auditoria();
+
         auditoria.setAcao(acao);
         auditoria.setEntidade(entidade);
         auditoria.setDescricao(descricao);
