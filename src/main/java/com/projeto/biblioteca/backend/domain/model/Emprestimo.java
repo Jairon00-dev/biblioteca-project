@@ -1,5 +1,6 @@
 package com.projeto.biblioteca.backend.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,11 +15,20 @@ public class Emprestimo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
     private String dataEmprestimo;
+
     private String dataDevolucao;
+
     private String status;
-    private Long usuarioId;
-    private Long livroId;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "livro_id")
+    private Livro livro;
 }

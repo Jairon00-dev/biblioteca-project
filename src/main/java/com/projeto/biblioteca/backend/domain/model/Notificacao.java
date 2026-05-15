@@ -25,4 +25,8 @@ public class Notificacao {
     private String tipo;
 
     private LocalDateTime dataEnvio;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 }

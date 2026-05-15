@@ -9,9 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmprestimoDTO {
 
+    private Long id;
+
     private String dataEmprestimo;
+
     private String dataDevolucao;
+
     private String status;
-    private Long usuarioId;
-    private Long livroId;
+
+    private UsuarioDTO usuario;
+
+    private LivroDTO livro;
 }

@@ -3,10 +3,12 @@ package com.projeto.biblioteca.backend.service;
 import com.projeto.biblioteca.backend.domain.dto.NotificacaoDTO;
 import com.projeto.biblioteca.backend.domain.model.Notificacao;
 import com.projeto.biblioteca.backend.repository.NotificacaoRepository;
+import com.projeto.biblioteca.backend.repository.UsuarioRepository;
 import com.projeto.biblioteca.backend.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,9 +20,30 @@ public class NotificacaoService {
     private NotificacaoRepository repository;
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
     private AuditoriaService auditoriaService;
 
     public Notificacao save(Notificacao notificacao){
+
+        if(notificacao.getUsuario() == null ||
+                notificacao.getUsuario().getId() == null){
+
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Usuário obrigatório"
+            );
+        }
+
+        usuarioRepository.findById(
+                notificacao.getUsuario().getId()
+        ).orElseThrow(() ->
+                new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuário não encontrado"
+                )
+        );
 
         notificacao.setDataEnvio(LocalDateTime.now());
 

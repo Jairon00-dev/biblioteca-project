@@ -18,4 +18,6 @@ public class NotificacaoDTO {
     private String tipo;
 
     private LocalDateTime dataEnvio;
+
+    private UsuarioDTO usuario;
 }
