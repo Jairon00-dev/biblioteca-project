@@ -48,6 +48,8 @@ public class EmprestimoService {
             );
         }
 
+        // VALIDA SE O USER INFORMADO EXISTE ANTES DE REGISTRAR EMPRESTIMO
+
         usuarioRepository.findById(
                 emprestimo.getUsuario().getId()
         ).orElseThrow(() ->

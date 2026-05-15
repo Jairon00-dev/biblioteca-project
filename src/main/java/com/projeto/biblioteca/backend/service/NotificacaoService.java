@@ -45,6 +45,8 @@ public class NotificacaoService {
                 )
         );
 
+        // DEFINE A DATA DE ENVIO DA NOTIFICAÇÃO
+
         notificacao.setDataEnvio(LocalDateTime.now());
 
         Notificacao salva = repository.save(notificacao);

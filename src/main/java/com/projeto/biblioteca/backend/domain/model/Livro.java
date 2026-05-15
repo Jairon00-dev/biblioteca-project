@@ -24,6 +24,8 @@ public class Livro {
 
     private Integer quantidadeDisponivel;
 
+    // RELACIONA O LIVRO A CATEGORIA CADASTRADA NO SISTEMA
+
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;

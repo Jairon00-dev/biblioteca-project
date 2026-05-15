@@ -37,6 +37,8 @@ public class LivroService {
             );
         }
 
+        // EVITA CADASTRO DUPLICADO DE LIVROS COM MESMO TITULO
+
         if(exists){
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,

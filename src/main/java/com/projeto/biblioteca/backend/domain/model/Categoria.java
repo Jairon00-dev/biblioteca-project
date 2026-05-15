@@ -27,6 +27,8 @@ public class Categoria {
 
     private String observacao;
 
+    // IGNORA A LISTA DE LIVROS NO JSON EVITANDO LOOP INFINITO
+
     @JsonIgnore
     @OneToMany(mappedBy = "categoria")
     private List<Livro> livros;
