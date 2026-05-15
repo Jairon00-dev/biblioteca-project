@@ -85,6 +85,35 @@ Permite:
 
 ---
 
+## 📂 CRUD de Categorias
+
+Permite:
+- cadastrar categorias
+- listar categorias
+- buscar categoria por ID
+- remover categorias
+
+Campos principais:
+- id
+- nome
+  
+---
+
+## 🔔 CRUD de Notificações
+
+Permite:
+- cadastrar notificações
+- listar notificações
+- buscar notificação por ID
+- remover notificações
+
+Campos principais:
+- id
+- mensagem
+- dataEnvio
+  
+---
+
 # 🔍 Funcionalidade Adicional — Auditoria
 
 O sistema possui uma funcionalidade de auditoria responsável por registrar automaticamente ações importantes realizadas na aplicação.
