@@ -5,6 +5,8 @@ import com.projeto.biblioteca.backend.domain.model.Livro;
 import com.projeto.biblioteca.backend.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import java.util.List;
 
@@ -29,6 +31,17 @@ public class LivroController {
     public List<LivroDTO> findAll(){
         return service.findAll();
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Livro encontrado com sucesso"
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Livro não encontrado"
+            )
+    })
 
     @GetMapping("/{id}")
     public LivroDTO findById(@PathVariable Long id){

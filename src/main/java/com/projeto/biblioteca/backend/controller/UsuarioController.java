@@ -5,6 +5,8 @@ import com.projeto.biblioteca.backend.domain.model.Usuario;
 import com.projeto.biblioteca.backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import java.util.List;
 
@@ -24,6 +26,17 @@ public class UsuarioController {
     public List<UsuarioDTO> findAll(){
         return service.findAll();
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Usuário encontrado com sucesso"
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Usuário não encontrado"
+            )
+    })
 
     @GetMapping("/{id}")
     public UsuarioDTO findById(@PathVariable Long id){
