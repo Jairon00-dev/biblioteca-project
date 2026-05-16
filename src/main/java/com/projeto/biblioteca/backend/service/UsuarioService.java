@@ -5,7 +5,9 @@ import com.projeto.biblioteca.backend.domain.model.Usuario;
 import com.projeto.biblioteca.backend.repository.UsuarioRepository;
 import com.projeto.biblioteca.backend.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -20,29 +22,46 @@ public class UsuarioService {
 
     public Usuario save(Usuario usuario){
 
+        boolean isCreate = usuario.getId() == null;
+
         Usuario salvo = repository.save(usuario);
 
         auditoriaService.registrar(
-                "CREATE",
+                isCreate ? "CREATE" : "UPDATE",
                 "Usuario",
-                "Usuário criado: " + usuario.getNome()
+                "Usuário salvo: " + usuario.getNome()
         );
 
         return salvo;
     }
 
     public List<UsuarioDTO> findAll(){
-        return MapperUtil.parseListObjects(repository.findAll(), UsuarioDTO.class);
+        return MapperUtil.parseListObjects(
+                repository.findAll(),
+                UsuarioDTO.class
+        );
     }
 
     public UsuarioDTO findById(Long id){
         return MapperUtil.parseObject(
-                repository.findById(id).orElseThrow(),
+                repository.findById(id).orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Usuário não encontrado"
+                        )
+                ),
                 UsuarioDTO.class
         );
     }
 
     public void delete(Long id){
+
+        repository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuário não encontrado"
+                )
+        );
 
         repository.deleteById(id);
 

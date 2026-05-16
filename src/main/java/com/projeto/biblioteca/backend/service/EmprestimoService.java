@@ -48,9 +48,7 @@ public class EmprestimoService {
             );
         }
 
-        // VALIDA SE O USER INFORMADO EXISTE ANTES DE REGISTRAR EMPRESTIMO
-
-        usuarioRepository.findById(
+        var usuario = usuarioRepository.findById(
                 emprestimo.getUsuario().getId()
         ).orElseThrow(() ->
                 new ResponseStatusException(
@@ -59,7 +57,7 @@ public class EmprestimoService {
                 )
         );
 
-        livroRepository.findById(
+        var livro = livroRepository.findById(
                 emprestimo.getLivro().getId()
         ).orElseThrow(() ->
                 new ResponseStatusException(
@@ -68,12 +66,17 @@ public class EmprestimoService {
                 )
         );
 
+        emprestimo.setUsuario(usuario);
+        emprestimo.setLivro(livro);
+
+        boolean isCreate = emprestimo.getId() == null;
+
         Emprestimo salvo = repository.save(emprestimo);
 
         auditoriaService.registrar(
-                "CREATE",
+                isCreate ? "CREATE" : "UPDATE",
                 "Emprestimo",
-                "Empréstimo realizado ID: " + salvo.getId()
+                "Empréstimo salvo ID: " + salvo.getId()
         );
 
         return salvo;
@@ -88,12 +91,24 @@ public class EmprestimoService {
 
     public EmprestimoDTO findById(Long id){
         return MapperUtil.parseObject(
-                repository.findById(id).orElseThrow(),
+                repository.findById(id).orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Empréstimo não encontrado"
+                        )
+                ),
                 EmprestimoDTO.class
         );
     }
 
     public void delete(Long id){
+
+        repository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Empréstimo não encontrado"
+                )
+        );
 
         repository.deleteById(id);
 

@@ -36,7 +36,7 @@ public class NotificacaoService {
             );
         }
 
-        usuarioRepository.findById(
+        var usuario = usuarioRepository.findById(
                 notificacao.getUsuario().getId()
         ).orElseThrow(() ->
                 new ResponseStatusException(
@@ -45,16 +45,18 @@ public class NotificacaoService {
                 )
         );
 
-        // DEFINE A DATA DE ENVIO DA NOTIFICAÇÃO
+        notificacao.setUsuario(usuario);
 
         notificacao.setDataEnvio(LocalDateTime.now());
+
+        boolean isCreate = notificacao.getId() == null;
 
         Notificacao salva = repository.save(notificacao);
 
         auditoriaService.registrar(
-                "CREATE",
+                isCreate ? "CREATE" : "UPDATE",
                 "Notificacao",
-                "Notificação criada"
+                "Notificação salva"
         );
 
         return salva;
@@ -69,12 +71,24 @@ public class NotificacaoService {
 
     public NotificacaoDTO findById(Long id){
         return MapperUtil.parseObject(
-                repository.findById(id).orElseThrow(),
+                repository.findById(id).orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Notificação não encontrada"
+                        )
+                ),
                 NotificacaoDTO.class
         );
     }
 
     public void delete(Long id){
+
+        repository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Notificação não encontrada"
+                )
+        );
 
         repository.deleteById(id);
 

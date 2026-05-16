@@ -1,11 +1,15 @@
 package com.projeto.biblioteca.backend.domain.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_usuario")
-@Data
 public class Usuario {
 
     @Id
@@ -13,6 +17,10 @@ public class Usuario {
     private Long id;
 
     private String nome;
+
     private String email;
-    private String tipo; // aluno, professor, etc
+
+    // DEFINE O PERFIL DO USUÁRIO NO SISTEMA
+
+    private String perfil;
 }

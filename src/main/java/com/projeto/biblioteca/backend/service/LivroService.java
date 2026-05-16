@@ -37,8 +37,6 @@ public class LivroService {
             );
         }
 
-        // EVITA CADASTRO DUPLICADO DE LIVROS COM MESMO TITULO
-
         if(exists){
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
@@ -55,7 +53,7 @@ public class LivroService {
             );
         }
 
-        categoriaRepository.findById(
+        var categoria = categoriaRepository.findById(
                 livro.getCategoria().getId()
         ).orElseThrow(() ->
                 new ResponseStatusException(
@@ -64,12 +62,16 @@ public class LivroService {
                 )
         );
 
+        livro.setCategoria(categoria);
+
+        boolean isCreate = livro.getId() == null;
+
         Livro livroSalvo = repository.save(livro);
 
         auditoriaService.registrar(
-                "CREATE",
+                isCreate ? "CREATE" : "UPDATE",
                 "Livro",
-                "Livro criado: " + livro.getTitulo()
+                "Livro salvo: " + livro.getTitulo()
         );
 
         return livroSalvo;
@@ -84,12 +86,24 @@ public class LivroService {
 
     public LivroDTO findById(Long id){
         return MapperUtil.parseObject(
-                repository.findById(id).orElseThrow(),
+                repository.findById(id).orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Livro não encontrado"
+                        )
+                ),
                 LivroDTO.class
         );
     }
 
     public void delete(Long id){
+
+        repository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Livro não encontrado"
+                )
+        );
 
         repository.deleteById(id);
 

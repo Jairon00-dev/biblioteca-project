@@ -3,15 +3,15 @@ package com.projeto.biblioteca.backend.controller;
 import com.projeto.biblioteca.backend.domain.dto.UsuarioDTO;
 import com.projeto.biblioteca.backend.domain.model.Usuario;
 import com.projeto.biblioteca.backend.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/api/v1/usuario")
 public class UsuarioController {
 
     @Autowired
@@ -19,6 +19,11 @@ public class UsuarioController {
 
     @PostMapping
     public Usuario save(@RequestBody Usuario usuario){
+        return service.save(usuario);
+    }
+
+    @PutMapping
+    public Usuario update(@RequestBody Usuario usuario){
         return service.save(usuario);
     }
 
