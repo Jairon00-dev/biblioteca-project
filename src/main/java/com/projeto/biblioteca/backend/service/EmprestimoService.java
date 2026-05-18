@@ -71,6 +71,36 @@ public class EmprestimoService {
 
         boolean isCreate = emprestimo.getId() == null;
 
+        // REDUZ ESTOQUE APENAS QUANDO O EMPRÉSTIMO É CRIADO
+
+        if(isCreate){
+
+            if(livro.getQuantidadeDisponivel() <= 0){
+
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Livro indisponível no estoque"
+                );
+            }
+
+            livro.setQuantidadeDisponivel(
+                    livro.getQuantidadeDisponivel() - 1
+            );
+
+            livroRepository.save(livro);
+        }
+
+        // DEVOLVE LIVRO AO ESTOQUE APENAS NA ATUALIZAÇÃO
+
+        else if("DEVOLVIDO".equalsIgnoreCase(emprestimo.getStatus())){
+
+            livro.setQuantidadeDisponivel(
+                    livro.getQuantidadeDisponivel() + 1
+            );
+
+            livroRepository.save(livro);
+        }
+
         Emprestimo salvo = repository.save(emprestimo);
 
         auditoriaService.registrar(
